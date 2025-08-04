@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "dashboard": "Tafelwit n usedlul",
+    "unitDetails": "Tanaṣt-inu",
+    "payments": "Tisent",
+    "voting": "Aferz",
+    "complaints": "Aseɣbet",
+    "documents": "Tifelwin",
+    "social": "Tametti",
+    "visitors": "Anerzi n imerden",
+    "legal": "Amerkez azgaren",
+    "settings": "Tiseɣsal"
+  },
+  "dashboard": {
+    "welcome": "Anṣuf s tuɣalin, {{name}}",
+    "subtitle": "Haten wayen iteddun s taɣult-nnek ass-a.",
+    "refresh": "Sismel",
+    "paymentStatus": "Addad n usexlas",
+    "ownershipShare": "Azal n timmelkit",
+    "pendingVotes": "Tiferziyin n usarar",
+    "openComplaints": "Iseɣbaten yeldin",
+    "upToDate": "D amaynaw",
+    "recentPayments": "Tisent tineggura",
+    "upcomingEvents": "Tidyanin ara d-asen",
+    "activeVoting": "Tiferziyin urmiden",
+    "communityUpdates": "Isallen n tmetti",
+    "quickActions": "Tigawt tuzzifin"
+  },
+  "auth": {
+    "login": "Anekcum",
+    "email": "Imayl",
+    "password": "Awal uffir",
+    "role": "Tamlelt",
+    "owner": "Amseɣzu n teɣult",
+    "agent": "Anegaṛ n tmetti",
+    "supervisor": "Aneɣluf",
+    "loginButton": "Kcem",
+    "loginError": "Tiselkint ur d-nḥeqqen ara"
+  },
+  "common": {
+    "loading": "Asali...",
+    "save": "Sekles",
+    "cancel": "Sefsex",
+    "submit": "Azen",
+    "delete": "Kkes",
+    "edit": "Ẓreg",
+    "view": "Ẓer",
+    "close": "Medel",
+    "yes": "Ih",
+    "no": "Uhu",
+    "paid": "Yettwaxles",
+    "pending": "Yesaraḍ",
+    "overdue": "Iεeṭṭel",
+    "active": "Urmid",
+    "viewAll": "Ẓer akk"
+  },
+  "actions": {
+    "submitComplaint": "Azen aseɣbet",
+    "requestVisitorEntry": "Ssuter anekcum n umrar",
+    "viewDocuments": "Ẓer tifelwin",
+    "makePayment": "Eg uxlas",
+    "submitComplaintDesc": "Mmel uguren n ussefṛu",
+    "requestVisitorEntryDesc": "Sekles imerden send",
+    "viewDocumentsDesc": "Kcem ɣer ifelliyen izgaranen",
+    "makePaymentDesc": "Xles irden n wayyur"
+  },
+  "voting": {
+    "voteYes": "Ih",
+    "voteNo": "Uhu",
+    "deadline": "Talast taneggaru",
+    "participation": "Attekkiw"
+  },
+  "languages": {
+    "english": "English",
+    "french": "Français",
+    "arabic": "العربية",
+    "amazigh": "Tamazight"
+  }
+}

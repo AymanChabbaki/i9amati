@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "unitDetails": "My Unit",
+    "payments": "Payments",
+    "voting": "Voting",
+    "complaints": "Complaints",
+    "documents": "Documents",
+    "social": "Community",
+    "visitors": "Visitor Entry",
+    "legal": "Legal Center",
+    "settings": "Settings"
+  },
+  "dashboard": {
+    "welcome": "Welcome back, {{name}}",
+    "subtitle": "Here's what's happening with your property today.",
+    "refresh": "Refresh",
+    "paymentStatus": "Payment Status",
+    "ownershipShare": "Ownership Share",
+    "pendingVotes": "Pending Votes",
+    "openComplaints": "Open Complaints",
+    "upToDate": "Up to Date",
+    "recentPayments": "Recent Payments",
+    "upcomingEvents": "Upcoming Events",
+    "activeVoting": "Active Voting Sessions",
+    "communityUpdates": "Community Updates",
+    "quickActions": "Quick Actions"
+  },
+  "auth": {
+    "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "role": "Role",
+    "owner": "Property Owner",
+    "agent": "Union Agent",
+    "supervisor": "Supervisor",
+    "loginButton": "Sign In",
+    "loginError": "Invalid credentials"
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "paid": "Paid",
+    "pending": "Pending",
+    "overdue": "Overdue",
+    "active": "Active",
+    "viewAll": "View all"
+  },
+  "actions": {
+    "submitComplaint": "Submit Complaint",
+    "requestVisitorEntry": "Visitor Entry Request",
+    "viewDocuments": "View Documents",
+    "makePayment": "Make Payment",
+    "submitComplaintDesc": "Report maintenance issues or concerns",
+    "requestVisitorEntryDesc": "Register visitors in advance",
+    "viewDocumentsDesc": "Access legal docs and agreements",
+    "makePaymentDesc": "Pay monthly charges or fees"
+  },
+  "voting": {
+    "voteYes": "Yes",
+    "voteNo": "No",
+    "deadline": "Deadline",
+    "participation": "Participation"
+  },
+  "languages": {
+    "english": "English",
+    "french": "Français",
+    "arabic": "العربية",
+    "amazigh": "Tamazight"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "unitDetails": "Mon appartement",
+    "payments": "Paiements",
+    "voting": "Vote",
+    "complaints": "Réclamations",
+    "documents": "Documents",
+    "social": "Communauté",
+    "visitors": "Entrée visiteurs",
+    "legal": "Centre juridique",
+    "settings": "Paramètres"
+  },
+  "dashboard": {
+    "welcome": "Bon retour, {{name}}",
+    "subtitle": "Voici ce qui se passe avec votre propriété aujourd'hui.",
+    "refresh": "Actualiser",
+    "paymentStatus": "Statut des paiements",
+    "ownershipShare": "Part de propriété",
+    "pendingVotes": "Votes en attente",
+    "openComplaints": "Réclamations ouvertes",
+    "upToDate": "À jour",
+    "recentPayments": "Paiements récents",
+    "upcomingEvents": "Événements à venir",
+    "activeVoting": "Sessions de vote actives",
+    "communityUpdates": "Actualités de la communauté",
+    "quickActions": "Actions rapides"
+  },
+  "auth": {
+    "login": "Connexion",
+    "email": "Email",
+    "password": "Mot de passe",
+    "role": "Rôle",
+    "owner": "Propriétaire",
+    "agent": "Agent syndical",
+    "supervisor": "Superviseur",
+    "loginButton": "Se connecter",
+    "loginError": "Identifiants invalides"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "submit": "Soumettre",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "view": "Voir",
+    "close": "Fermer",
+    "yes": "Oui",
+    "no": "Non",
+    "paid": "Payé",
+    "pending": "En attente",
+    "overdue": "En retard",
+    "active": "Actif",
+    "viewAll": "Voir tout"
+  },
+  "actions": {
+    "submitComplaint": "Soumettre une réclamation",
+    "requestVisitorEntry": "Demande d'entrée visiteur",
+    "viewDocuments": "Voir les documents",
+    "makePayment": "Effectuer un paiement",
+    "submitComplaintDesc": "Signaler des problèmes de maintenance",
+    "requestVisitorEntryDesc": "Enregistrer les visiteurs à l'avance",
+    "viewDocumentsDesc": "Accéder aux documents juridiques",
+    "makePaymentDesc": "Payer les charges mensuelles"
+  },
+  "voting": {
+    "voteYes": "Oui",
+    "voteNo": "Non",
+    "deadline": "Date limite",
+    "participation": "Participation"
+  },
+  "languages": {
+    "english": "English",
+    "french": "Français",
+    "arabic": "العربية",
+    "amazigh": "Tamazight"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "dashboard": "لوحة القيادة",
+    "unitDetails": "وحدتي",
+    "payments": "المدفوعات",
+    "voting": "التصويت",
+    "complaints": "الشكاوى",
+    "documents": "الوثائق",
+    "social": "المجتمع",
+    "visitors": "دخول الزوار",
+    "legal": "المركز القانوني",
+    "settings": "الإعدادات"
+  },
+  "dashboard": {
+    "welcome": "مرحباً بعودتك، {{name}}",
+    "subtitle": "هذا ما يحدث مع عقارك اليوم.",
+    "refresh": "تحديث",
+    "paymentStatus": "حالة الدفع",
+    "ownershipShare": "حصة الملكية",
+    "pendingVotes": "الأصوات المعلقة",
+    "openComplaints": "الشكاوى المفتوحة",
+    "upToDate": "محدث",
+    "recentPayments": "المدفوعات الأخيرة",
+    "upcomingEvents": "الأحداث القادمة",
+    "activeVoting": "جلسات التصويت النشطة",
+    "communityUpdates": "تحديثات المجتمع",
+    "quickActions": "إجراءات سريعة"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "role": "الدور",
+    "owner": "مالك العقار",
+    "agent": "وكيل النقابة",
+    "supervisor": "مشرف",
+    "loginButton": "دخول",
+    "loginError": "بيانات اعتماد غير صحيحة"
+  },
+  "common": {
+    "loading": "جاري التحميل...",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "submit": "إرسال",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "view": "عرض",
+    "close": "إغلاق",
+    "yes": "نعم",
+    "no": "لا",
+    "paid": "مدفوع",
+    "pending": "معلق",
+    "overdue": "متأخر",
+    "active": "نشط",
+    "viewAll": "عرض الكل"
+  },
+  "actions": {
+    "submitComplaint": "تقديم شكوى",
+    "requestVisitorEntry": "طلب دخول زائر",
+    "viewDocuments": "عرض الوثائق",
+    "makePayment": "إجراء دفعة",
+    "submitComplaintDesc": "الإبلاغ عن مشاكل الصيانة",
+    "requestVisitorEntryDesc": "تسجيل الزوار مسبقاً",
+    "viewDocumentsDesc": "الوصول إلى الوثائق القانونية",
+    "makePaymentDesc": "دفع الرسوم الشهرية"
+  },
+  "voting": {
+    "voteYes": "نعم",
+    "voteNo": "لا",
+    "deadline": "الموعد النهائي",
+    "participation": "المشاركة"
+  },
+  "languages": {
+    "english": "English",
+    "french": "Français",
+    "arabic": "العربية",
+    "amazigh": "Tamazight"
+  }
+}
