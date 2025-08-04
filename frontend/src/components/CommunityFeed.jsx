@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '../contexts/AuthContext';
-import { MessageSquare, Heart, Share2, Clock } from 'lucide-react';
+import { MessageSquare, Heart, Share2, Clock, User } from 'lucide-react';
 
 export default function CommunityFeed() {
   const { user } = useAuth();
@@ -39,70 +39,72 @@ export default function CommunityFeed() {
     }
   ];
 
-  const getRoleBadge = (role) => {
-    switch (role) {
-      case 'Agent':
-        return '🏢';
-      case 'Owner':
-        return '🏠';
-      case 'Supervisor':
-        return '👔';
-      default:
-        return '👤';
-    }
-  };
+  // Facebook-style avatar (could be replaced with real user image)
+  const getAvatar = (author) => (
+    <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center mr-3 border border-gray-300">
+      <User className="h-6 w-6 text-gray-500" />
+    </div>
+  );
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center space-x-2">
-          <MessageSquare className="h-5 w-5" />
+    <Card className="bg-[#f0f2f5] border-none shadow-none">
+      <CardHeader className="bg-white rounded-t-xl shadow-sm border-b border-gray-200">
+        <CardTitle className="flex items-center space-x-2 text-[#1877f2] font-bold text-lg">
+          <MessageSquare className="h-6 w-6" />
           <span>Community Feed</span>
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          {mockPosts.map((post) => (
-            <div key={post.id} className="border border-gray-200 rounded-lg p-4">
-              <div className="flex items-start space-x-3">
-                <div className="text-2xl">{getRoleBadge(post.role)}</div>
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <span className="font-medium text-gray-900">{post.author}</span>
-                    <span className="text-sm text-gray-500">•</span>
-                    <span className="text-sm text-gray-500">{post.role}</span>
-                    <span className="text-sm text-gray-500">•</span>
-                    <div className="flex items-center space-x-1 text-sm text-gray-500">
-                      <Clock className="h-3 w-3" />
-                      <span>{post.timestamp}</span>
-                    </div>
-                  </div>
-                  <p className="text-gray-700 mb-3">{post.content}</p>
-                  <div className="flex items-center space-x-4">
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      className={`flex items-center space-x-1 ${post.hasLiked ? 'text-red-500' : 'text-gray-500'}`}
-                    >
-                      <Heart className={`h-4 w-4 ${post.hasLiked ? 'fill-current' : ''}`} />
-                      <span>{post.likes}</span>
-                    </Button>
-                    <Button variant="ghost" size="sm" className="flex items-center space-x-1 text-gray-500">
-                      <MessageSquare className="h-4 w-4" />
-                      <span>{post.comments}</span>
-                    </Button>
-                    <Button variant="ghost" size="sm" className="flex items-center space-x-1 text-gray-500">
-                      <Share2 className="h-4 w-4" />
-                      <span>Share</span>
-                    </Button>
+      <CardContent className="space-y-6">
+        {mockPosts.map((post) => (
+          <div
+            key={post.id}
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 flex flex-col"
+          >
+            <div className="flex items-center mb-2">
+              {getAvatar(post.author)}
+              <div className="flex-1">
+                <div className="flex items-center space-x-2">
+                  <span className="font-semibold text-gray-900">{post.author}</span>
+                  <span className="text-xs px-2 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-200">{post.role}</span>
+                  <span className="text-xs text-gray-400">•</span>
+                  <div className="flex items-center space-x-1 text-xs text-gray-400">
+                    <Clock className="h-3 w-3" />
+                    <span>{post.timestamp}</span>
                   </div>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-        <div className="mt-4 pt-4 border-t border-gray-200">
-          <Button variant="outline" className="w-full">
+            <p className="text-gray-800 text-base mb-3 leading-relaxed">{post.content}</p>
+            <div className="flex items-center border-t border-gray-100 pt-2 mt-2 space-x-6">
+              <Button
+                variant="ghost"
+                size="sm"
+                className={`flex items-center space-x-1 px-2 py-1 rounded-full transition-colors duration-150 ${post.hasLiked ? 'text-[#e53e3e] bg-[#fbe9ea] hover:bg-[#fbe9ea]' : 'text-gray-500 hover:bg-gray-100'}`}
+              >
+                <Heart className={`h-4 w-4 ${post.hasLiked ? 'fill-[#e53e3e]' : ''}`} />
+                <span className="ml-1 text-sm font-medium">{post.likes}</span>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex items-center space-x-1 px-2 py-1 rounded-full text-gray-500 hover:bg-gray-100 transition-colors duration-150"
+              >
+                <MessageSquare className="h-4 w-4" />
+                <span className="ml-1 text-sm font-medium">{post.comments}</span>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="flex items-center space-x-1 px-2 py-1 rounded-full text-gray-500 hover:bg-gray-100 transition-colors duration-150"
+              >
+                <Share2 className="h-4 w-4" />
+                <span className="ml-1 text-sm font-medium">Share</span>
+              </Button>
+            </div>
+          </div>
+        ))}
+        <div className="pt-2">
+          <Button variant="outline" className="w-full rounded-full bg-white shadow-sm border border-gray-200 text-[#1877f2] font-semibold hover:bg-[#f0f2f5] transition-colors duration-150">
             View All Posts
           </Button>
         </div>

@@ -4,8 +4,10 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { mockPayments } from '../data/mockData';
 
+import { useState } from 'react';
 export default function Payments() {
   const { t } = useLanguage();
+  const [frequency, setFrequency] = useState('trimester');
 
   const getStatusBadge = (status) => {
     switch (status) {
@@ -20,57 +22,82 @@ export default function Payments() {
     }
   };
 
+  const frequencyOptions = [
+    { value: '3month', label: t('payments.3month', { defaultValue: '3 Months' }) },
+    { value: 'trimester', label: t('payments.trimester', { defaultValue: 'Trimester' }) },
+    { value: 'yearly', label: t('payments.yearly', { defaultValue: 'Yearly' }) },
+  ];
+
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">{t('nav.payments')}</h1>
           <p className="mt-1 text-sm text-gray-600">Manage your payment history and make new payments.</p>
         </div>
-        <Button className="bg-primary hover:bg-primary/90">
-          {t('actions.makePayment')}
-        </Button>
+        <div className="flex items-center gap-2">
+          <div className="flex bg-gray-100 rounded-xl p-1 shadow-sm">
+            {frequencyOptions.map(opt => (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => setFrequency(opt.value)}
+                className={`px-4 py-2 text-sm rounded-lg font-medium transition-colors duration-150 focus:outline-none
+                  ${frequency === opt.value
+                    ? 'bg-primary text-white shadow'
+                    : 'bg-transparent text-gray-700 hover:bg-primary/10'}
+                `}
+              >
+                {opt.label}
+              </button>
+            ))}
+          </div>
+          <Button className="bg-primary hover:bg-primary/90">
+            {t('actions.makePayment', { defaultValue: 'Make Payment' })} ({frequencyOptions.find(opt => opt.value === frequency)?.label})
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">Current Balance</p>
-                <p className="text-2xl font-bold text-gray-900">€0.00</p>
+        {/* Current Balance */}
+        <Card className="bg-gradient-to-br from-green-50 to-white shadow-md rounded-2xl border border-green-100">
+          <CardContent className="p-7 flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-14 h-14 bg-success/10 rounded-full flex items-center justify-center mb-2 shadow">
+                <span className="text-success text-2xl font-bold">✓</span>
               </div>
-              <div className="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center">
-                <span className="text-success font-medium">✓</span>
-              </div>
+              <p className="text-sm font-medium text-success">{t('payments.currentBalance', { defaultValue: 'Current Balance' })}</p>
+              <p className="text-3xl font-bold text-gray-900">€0.00</p>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">Next Payment Due</p>
-                <p className="text-2xl font-bold text-gray-900">Dec 1</p>
+        {/* Next Payment Due */}
+        <Card className="bg-gradient-to-br from-yellow-50 to-white shadow-md rounded-2xl border border-yellow-100">
+          <CardContent className="p-7 flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-14 h-14 bg-warning/10 rounded-full flex items-center justify-center mb-2 shadow">
+                <span className="text-warning text-2xl font-bold">!</span>
               </div>
-              <div className="w-12 h-12 bg-warning/10 rounded-full flex items-center justify-center">
-                <span className="text-warning font-medium">!</span>
-              </div>
+              <p className="text-sm font-medium text-warning">{t('payments.nextDue', { defaultValue: 'Next Payment Due' })}</p>
+              <p className="text-3xl font-bold text-gray-900">Dec 1</p>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-gray-600">Monthly Amount</p>
-                <p className="text-2xl font-bold text-gray-900">€320.00</p>
+        {/* Amount */}
+        <Card className="bg-gradient-to-br from-blue-50 to-white shadow-md rounded-2xl border border-blue-100">
+          <CardContent className="p-7 flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-2 shadow">
+                <span className="text-primary text-2xl font-bold">€</span>
               </div>
-              <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                <span className="text-primary font-medium">€</span>
-              </div>
+              <span className="text-3xl font-bold text-primary">
+                {frequency === '3month' && '€960.00'}
+                {frequency === 'trimester' && '€960.00'}
+                {frequency === 'yearly' && '€3840.00'}
+              </span>
+              <p className="text-sm font-medium text-primary mt-2">{t('payments.amountLabel', { defaultValue: 'Amount' })}</p>
             </div>
           </CardContent>
         </Card>
