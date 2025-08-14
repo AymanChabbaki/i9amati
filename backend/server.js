@@ -1,3 +1,7 @@
+import authRoutes from './routes/auth.js';
+import unionAgentRoutes from './routes/unionAgent.js';
+app.use('/api/auth', authRoutes);
+app.use('/api/union', unionAgentRoutes);
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
