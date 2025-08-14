@@ -1,23 +1,33 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 import { registerRoutes } from "./routes.js";
+import connectDB from "./db.js";
+
+dotenv.config(); // Load environment variables
 
 const app = express();
 
-// Enable CORS for frontend communication
-app.use(cors({
-  origin: process.env.FRONTEND_URL || "http://localhost:3000",
-  credentials: true
-}));
-
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Enable CORS
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    credentials: true,
+  })
+);
+
+// Connect DB
+connectDB();
 
 // Logging middleware
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
-  let capturedJsonResponse = undefined;
+  let capturedJsonResponse;
 
   const originalResJson = res.json;
   res.json = function (bodyJson, ...args) {
@@ -32,11 +42,9 @@ app.use((req, res, next) => {
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
-
       if (logLine.length > 80) {
         logLine = logLine.slice(0, 79) + "…";
       }
-
       console.log(logLine);
     }
   });
@@ -45,15 +53,11 @@ app.use((req, res, next) => {
 });
 
 // Register API routes
-const server = await registerRoutes(app);
+await registerRoutes(app);
 
-// Error handling middleware
-app.use((err, _req, res, _next) => {
-  const status = err.status || err.statusCode || 500;
-  const message = err.message || "Internal Server Error";
-
-  res.status(status).json({ message });
-  console.error(err);
+// Example route
+app.get("/", (req, res) => {
+  res.send("Iqamati API is running...");
 });
 
 // Health check endpoint
@@ -61,9 +65,17 @@ app.get("/health", (req, res) => {
   res.json({ status: "OK", timestamp: new Date().toISOString() });
 });
 
+// Error handling middleware
+app.use((err, _req, res, _next) => {
+  const status = err.status || err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  res.status(status).json({ message });
+  console.error(err);
+});
+
 // Start server
-const port = parseInt(process.env.PORT || '3001', 10);
-server.listen(port, "0.0.0.0", () => {
-  console.log(`🚀 Backend server running on port ${port}`);
-  console.log(`📡 API endpoints available at http://localhost:${port}/api`);
+const PORT = parseInt(process.env.PORT || "3001", 10);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Backend server running on port ${PORT}`);
+  console.log(`📡 API endpoints available at http://localhost:${PORT}/api`);
 });
