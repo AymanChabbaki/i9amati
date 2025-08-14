@@ -19,7 +19,8 @@ export default function Meetings() {
     date: '',
     time: '',
     location: '',
-    agenda: ''
+    agenda: '',
+    type: '' // 'normal', 'exceptional', 'specialAccountant'
   });
 
   const mockMeetings = [
@@ -66,7 +67,14 @@ export default function Meetings() {
       description: "New meeting has been scheduled successfully.",
     });
     setIsCreateOpen(false);
-    setNewMeeting({ title: '', date: '', time: '', location: '', agenda: '' });
+    setNewMeeting({
+      title: '',
+      date: '',
+      time: '',
+      location: '',
+      agenda: '',
+      type: ''
+    });
   };
 
   return (
@@ -83,60 +91,104 @@ export default function Meetings() {
               Create Meeting
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-md">
+          <DialogContent
+            className="max-w-2xl w-full p-10 rounded-2xl bg-white flex flex-col items-center overflow-y-auto"
+            style={{ maxWidth: 700, maxHeight: '85vh', minHeight: 0 }}
+          >
             <DialogHeader>
               <DialogTitle>Create New Meeting</DialogTitle>
+              <p id="meeting-dialog-desc" className="text-sm text-gray-500 mt-1">Fill in the details and select the meeting type.</p>
             </DialogHeader>
-            <div className="space-y-4">
+            <div className="space-y-6 w-full" aria-describedby="meeting-dialog-desc">
               <div>
-                <Label htmlFor="title">Meeting Title</Label>
+                <Label className="font-semibold text-gray-800">Meeting Type</Label>
+                <div className="flex flex-wrap gap-4 mt-3">
+                  <label className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 bg-gray-50 cursor-pointer hover:bg-primary/10 transition">
+                    <input
+                      type="radio"
+                      name="meetingType"
+                      checked={newMeeting.type === 'normal'}
+                      onChange={() => setNewMeeting({ ...newMeeting, type: 'normal' })}
+                      className="accent-primary"
+                    />
+                    <span className="text-gray-700">Normal</span>
+                  </label>
+                  <label className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 bg-gray-50 cursor-pointer hover:bg-primary/10 transition">
+                    <input
+                      type="radio"
+                      name="meetingType"
+                      checked={newMeeting.type === 'exceptional'}
+                      onChange={() => setNewMeeting({ ...newMeeting, type: 'exceptional' })}
+                      className="accent-primary"
+                    />
+                    <span className="text-gray-700">Exceptional</span>
+                  </label>
+                  <label className="flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 bg-gray-50 cursor-pointer hover:bg-primary/10 transition">
+                    <input
+                      type="radio"
+                      name="meetingType"
+                      checked={newMeeting.type === 'specialAccountant'}
+                      onChange={() => setNewMeeting({ ...newMeeting, type: 'specialAccountant' })}
+                      className="accent-primary"
+                    />
+                    <span className="text-gray-700">Special Accountant</span>
+                  </label>
+                </div>
+              </div>
+              <div>
+                <Label htmlFor="title" className="font-semibold text-gray-800">Meeting Title</Label>
                 <Input
                   id="title"
                   value={newMeeting.title}
                   onChange={(e) => setNewMeeting({ ...newMeeting, title: e.target.value })}
                   placeholder="Enter meeting title"
+                  className="mt-2 px-4 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/30"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <Label htmlFor="date">Date</Label>
+                  <Label htmlFor="date" className="font-semibold text-gray-800">Date</Label>
                   <Input
                     id="date"
                     type="date"
                     value={newMeeting.date}
                     onChange={(e) => setNewMeeting({ ...newMeeting, date: e.target.value })}
+                    className="mt-2 px-4 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/30"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="time">Time</Label>
+                  <Label htmlFor="time" className="font-semibold text-gray-800">Time</Label>
                   <Input
                     id="time"
                     type="time"
                     value={newMeeting.time}
                     onChange={(e) => setNewMeeting({ ...newMeeting, time: e.target.value })}
+                    className="mt-2 px-4 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/30"
                   />
                 </div>
               </div>
               <div>
-                <Label htmlFor="location">Location</Label>
+                <Label htmlFor="location" className="font-semibold text-gray-800">Location</Label>
                 <Input
                   id="location"
                   value={newMeeting.location}
                   onChange={(e) => setNewMeeting({ ...newMeeting, location: e.target.value })}
                   placeholder="Meeting location"
+                  className="mt-2 px-4 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/30"
                 />
               </div>
               <div>
-                <Label htmlFor="agenda">Agenda Items (one per line)</Label>
+                <Label htmlFor="agenda" className="font-semibold text-gray-800">Agenda Items (one per line)</Label>
                 <Textarea
                   id="agenda"
                   value={newMeeting.agenda}
                   onChange={(e) => setNewMeeting({ ...newMeeting, agenda: e.target.value })}
                   placeholder="Enter agenda items"
                   rows={4}
+                  className="mt-2 px-4 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary/30"
                 />
               </div>
-              <Button onClick={handleCreateMeeting} className="w-full">
+              <Button onClick={handleCreateMeeting} className="w-full mt-2 bg-primary hover:bg-primary/90 text-white font-semibold py-2 rounded-lg shadow">
                 Create Meeting
               </Button>
             </div>
