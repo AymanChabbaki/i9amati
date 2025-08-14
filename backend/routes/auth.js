@@ -1,11 +1,11 @@
 // backend/routes/auth.js
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const ctrl = require('../controllers/authController');
-const { auth } = require('../middleware/auth');
+import ctrl from '../controllers/authController.js';
+import { auth } from '../middleware/auth.js';
 
 router.post('/register', ctrl.register);
 router.post('/login', ctrl.login);
 router.get('/me', auth, ctrl.getUser);
 
-module.exports = router;
+export default router;

@@ -1,8 +1,8 @@
 // backend/routes/unionAgent.js
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const ctrl = require('../controllers/unionAgentController');
-const { auth, requireRole } = require('../middleware/auth');
+import ctrl from '../controllers/unionAgentController.js';
+import { auth, requireRole } from '../middleware/auth.js';
 
 // Add apartment
 router.post('/apartments', auth, requireRole('union_agent'), ctrl.addApartment);
@@ -15,4 +15,4 @@ router.delete('/apartments/resident', auth, requireRole('union_agent'), ctrl.rem
 // Edit apartment
 router.put('/apartments', auth, requireRole('union_agent'), ctrl.editApartment);
 
-module.exports = router;
+export default router;
