@@ -1,8 +1,8 @@
 // backend/controllers/authController.js
-const User = require('../models/User');
-const UnionAgent = require('../models/UnionAgent');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+import User from '../models/User.js';
+import UnionAgent from '../models/UnionAgent.js';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 // Helper: Generate 2-letter prefix from email
 function generatePrefix(email) {
@@ -10,7 +10,7 @@ function generatePrefix(email) {
 }
 
 // Register
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
   const { name, email, password, role } = req.body;
   const password_hash = await bcrypt.hash(password, 10);
 
@@ -29,7 +29,7 @@ exports.register = async (req, res) => {
 };
 
 // Login
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user) return res.status(400).json({ error: 'Invalid credentials' });
@@ -42,7 +42,7 @@ exports.login = async (req, res) => {
 };
 
 // Get user details
-exports.getUser = async (req, res) => {
+export const getUser = async (req, res) => {
   const user = await User.findById(req.user.id).select('-password_hash');
   res.json(user);
 };

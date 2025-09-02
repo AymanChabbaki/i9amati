@@ -67,7 +67,7 @@ export default function Payments() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        {user?.role === 'union_agent' || user?.role === 'agent' ? (
+  {user?.role === 'union_agent' || user?.role === 'agent' ? (
           <>
             <Card className="bg-gradient-to-br from-green-50 to-white shadow-md rounded-2xl border border-green-100">
               <CardContent className="p-7 flex flex-col items-center justify-center">

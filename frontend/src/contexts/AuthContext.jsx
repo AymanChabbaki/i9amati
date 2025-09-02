@@ -1,4 +1,6 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 const AuthContext = createContext(undefined);
 
@@ -14,42 +16,42 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+
   useEffect(() => {
-    // Check for stored auth data on mount
+    // Check for stored auth data and token on mount
     const storedUser = localStorage.getItem('iqamati_user');
+    const storedToken = localStorage.getItem('iqamati_token');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+    }
+    if (storedToken) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
     }
     setIsLoading(false);
   }, []);
 
-  const login = async (email, password, role) => {
+  const login = async (email, password) => {
     setIsLoading(true);
-    
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Mock user data based on role
-    const mockUser = {
-      id: '1',
-      name: role === 'owner' ? 'Fatima Al-Rashid' : 
-            role === 'agent' ? 'Ahmed Hassan' : 'Sarah Younes',
-      email,
-      role,
-      unit: role === 'owner' ? 'A101' : undefined,
-      ownershipShare: role === 'owner' ? 12.5 : undefined,
-      initials: role === 'owner' ? 'FA' : 
-                role === 'agent' ? 'AH' : 'SY'
-    };
-
-    setUser(mockUser);
-    localStorage.setItem('iqamati_user', JSON.stringify(mockUser));
-    setIsLoading(false);
+    try {
+      const res = await axios.post('/api/auth/login', { email, password });
+      const { token, user } = res.data;
+  // No role check, login is based on email/password only
+      setUser(user);
+      localStorage.setItem('iqamati_user', JSON.stringify(user));
+      localStorage.setItem('iqamati_token', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    } catch (err) {
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem('iqamati_user');
+    localStorage.removeItem('iqamati_token');
+    delete axios.defaults.headers.common['Authorization'];
   };
 
   const value = {

@@ -10,10 +10,21 @@ import ActiveVoting from '../components/ActiveVoting';
 import CommunityFeed from '../components/CommunityFeed';
 import QuickActions from '../components/QuickActions';
 
+
+
+import AddApartment from '../components/AddApartment';
+import UnionAgentSummary from '../components/UnionAgentSummary';
+import { useState } from 'react';
+
+
+
 export default function Dashboard() {
   const { user } = useAuth();
   const { t } = useLanguage();
   const { toast } = useToast();
+
+  const [newOwners, setNewOwners] = useState([]);
+
 
   const handleRefresh = () => {
     toast({
@@ -45,23 +56,29 @@ export default function Dashboard() {
       {/* Quick Stats */}
       <QuickStats />
 
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <div className="lg:col-span-2">
-          <RecentPayments />
+  {/* Add Apartment (for agents) */}
+  {(user?.role === 'agent' || user?.role === 'union_agent') && (
+        <div className="mb-8">
+          <AddApartment onApartmentAdded={data => setNewOwners(data.owners || [])} />
+          <UnionAgentSummary newOwners={newOwners} />
         </div>
-        <div>
-          <UpcomingEvents />
-        </div>
+      )}
+
+      {/* Upcoming Events - full width */}
+      <div className="mb-8">
+        <UpcomingEvents />
       </div>
 
-      {/* Active Voting */}
-      <ActiveVoting />
-
-      {/* Community and Actions */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <CommunityFeed />
-        <QuickActions />
+      {/* Dashboard Widgets */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div className="space-y-6">
+          <ActiveVoting />
+          <RecentPayments />
+        </div>
+        <div className="space-y-6">
+          <QuickActions />
+          <CommunityFeed />
+        </div>
       </div>
     </div>
   );

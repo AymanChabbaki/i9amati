@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
 
 
+
 const UserSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  email: { type: String, unique: true, required: true },
+  username: { type: String, unique: true, sparse: true }, // for property owners
+  email: { type: String, unique: true, sparse: true },
   phone: String,
   password_hash: { type: String, required: true },
   role: { type: String, enum: ['supervisor', 'union_agent', 'property_owner'], required: true },
