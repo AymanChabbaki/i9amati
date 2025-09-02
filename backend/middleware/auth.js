@@ -1,22 +1,31 @@
 // backend/middleware/auth.js
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
 
 // JWT authentication middleware
-exports.auth = async (req, res, next) => {
+
+export const auth = async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
-  if (!token) return res.status(401).json({ error: 'No token' });
+  console.log('--- AUTH DEBUG ---');
+  console.log('Authorization header:', req.headers.authorization);
+  console.log('Extracted token:', token);
+  if (!token) {
+    console.log('No token provided');
+    return res.status(401).json({ error: 'No token' });
+  }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('Decoded JWT:', decoded);
     req.user = decoded;
     next();
-  } catch {
+  } catch (err) {
+    console.log('JWT verification error:', err.message);
     res.status(401).json({ error: 'Invalid token' });
   }
 };
 
 // Role-based access control middleware
-exports.requireRole = (role) => (req, res, next) => {
+export const requireRole = (role) => (req, res, next) => {
   if (req.user.role !== role) return res.status(403).json({ error: 'Forbidden' });
   next();
 };

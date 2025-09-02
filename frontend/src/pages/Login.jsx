@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useLocation } from 'wouter';
@@ -6,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { demoUsers } from '../data/demoUsers';
 import { Building } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import LanguageSelector from '../components/LanguageSelector';
@@ -14,7 +15,6 @@ import LanguageSelector from '../components/LanguageSelector';
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('owner');
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
   const { t } = useLanguage();
@@ -24,9 +24,8 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-
     try {
-      await login(email, password, role);
+      await login(email, password);
       setLocation('/dashboard');
       toast({
         title: "Welcome!",
@@ -61,6 +60,20 @@ export default function Login() {
             <CardTitle className="text-center">{t('auth.login')}</CardTitle>
           </CardHeader>
           <CardContent>
+            {/* TEMP DEMO USERS BOX - REMOVE IN PRODUCTION! */}
+            <div className="mb-6 p-3 rounded bg-yellow-50 border border-yellow-200 text-xs text-gray-700">
+              <div className="font-semibold mb-2 text-yellow-700">Demo/Test Users</div>
+              <div className="space-y-1">
+                {demoUsers.map((u, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <span className="font-medium">{u.name}:</span>
+                    <span>Email: <span className="font-mono bg-gray-100 px-1 rounded">{u.email}</span></span>
+                    <span>Password: <span className="font-mono bg-gray-100 px-1 rounded">{u.password}</span></span>
+                    <span className="text-gray-400">({u.role})</span>
+                  </div>
+                ))}
+              </div>
+            </div>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <Label htmlFor="email">{t('auth.email')}</Label>
@@ -84,20 +97,6 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                 />
-              </div>
-
-              <div>
-                <Label htmlFor="role">{t('auth.role')}</Label>
-                <Select value={role} onValueChange={(value) => setRole(value)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder={t('auth.role')} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="owner">{t('auth.owner')}</SelectItem>
-                    <SelectItem value="agent">{t('auth.agent')}</SelectItem>
-                    <SelectItem value="supervisor">{t('auth.supervisor')}</SelectItem>
-                  </SelectContent>
-                </Select>
               </div>
 
               <Button 

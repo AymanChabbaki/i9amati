@@ -1,8 +1,9 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { registerRoutes } from "./routes.js";
 import connectDB from "./db.js";
+import authRoutes from './routes/auth.js';
+import unionAgentRoutes from './routes/unionAgent.js';
 
 dotenv.config(); // Load environment variables
 
@@ -22,6 +23,10 @@ app.use(
 
 // Connect DB
 connectDB();
+
+// Register API routes
+app.use('/api/auth', authRoutes);
+app.use('/api/union', unionAgentRoutes);
 
 // Logging middleware
 app.use((req, res, next) => {
@@ -52,8 +57,10 @@ app.use((req, res, next) => {
   next();
 });
 
+
 // Register API routes
 registerRoutes(app);
+
 
 // Example route
 app.get("/", (req, res) => {
@@ -74,7 +81,7 @@ app.use((err, _req, res, _next) => {
 });
 
 // Start server
-const PORT = parseInt(process.env.PORT || "3001", 10);
+const PORT = 3001;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`🚀 Backend server running on port ${PORT}`);
   console.log(`📡 API endpoints available at http://localhost:${PORT}/api`);

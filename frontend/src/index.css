@@ -2,6 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+/* === STRONG GLOBAL RESET FOR html AND body === */
+html, body {
+  /* Absolutely no spacing */
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important; /* Remove any default border */
+  /* Force dimensions to match the viewport */
+  height: 100% !important;
+  min-height: 100% !important; /* Ensure it's at least full height */
+  width: 100% !important;
+  min-width: 100% !important; /* Ensure it's at least full width */
+  /* Allow natural scrolling on html/body so pages can reach bottom */
+  overflow: auto !important;
+  /* Allow pull-to-refresh / default overscroll behavior where supported */
+  overscroll-behavior: auto !important;
+  /* Ensure content starts at the very top/left */
+  /* Note: box-sizing is set globally earlier */
+}
+
+/* Ensure #root also fills the body */
+#root {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 100% !important;
+  width: 100% !important;
+  min-height: 100% !important;
+  min-width: 100% !important;
+  overflow: auto !important; /* Allow scrolling inside #root */
+}
+/* === STRONGER GLOBAL RESET === */
+/* Apply a natural box layout model to all elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+
+/* Prevent body scroll when modal is open */
+/* More robust: hides both x and y overflow */
+body.modal-open {
+  overflow: hidden;
+}
+
+
+
+/* === THEME VARIABLES === */
 :root {
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(20, 14.3%, 4.1%);
@@ -62,6 +107,7 @@
 
 @layer base {
   * {
+    /* Make sure border-border doesn't accidentally add width */
     @apply border-border;
   }
 
@@ -108,3 +154,5 @@
     background-color: hsl(var(--error) / 0.1);
   }
 }
+
+/* Ensure no other styles are interfering */
