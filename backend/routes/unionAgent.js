@@ -1,6 +1,11 @@
 // backend/routes/unionAgent.js
 import express from 'express';
+
 import * as ctrl from '../controllers/unionAgentController.js';
+
+const router = express.Router();
+import ctrl from '../controllers/unionAgentController.js';
+
 import { auth, requireRole } from '../middleware/auth.js';
 
 const router = express.Router();

@@ -57,6 +57,11 @@ app.use((req, res, next) => {
   next();
 });
 
+
+// Register API routes
+registerRoutes(app);
+
+
 // Example route
 app.get("/", (req, res) => {
   res.send("Iqamati API is running...");

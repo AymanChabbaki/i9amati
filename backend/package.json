@@ -21,6 +21,7 @@
     "memorystore": "^1.6.7",
     "mongodb": "^6.18.0",
     "mongoose": "^8.17.1",
+    "mongose": "^0.0.2-security",
     "nanoid": "^5.1.5",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
