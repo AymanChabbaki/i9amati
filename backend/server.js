@@ -65,6 +65,11 @@ app.get("/health", (req, res) => {
   res.json({ status: "OK", timestamp: new Date().toISOString() });
 });
 
+app.get("/api", (req, res) => {
+  res.json({ history: "The Iqamati API was created to facilitate communication and management within residential communities." });
+  res.json({ message: "Welcome to the Iqamati API" });
+});
+
 // Error handling middleware
 app.use((err, _req, res, _next) => {
   const status = err.status || err.statusCode || 500;
