@@ -1,0 +1,37 @@
+# Nixpacks configuration for Railway (nixapack.toml)
+# This file installs Node, installs backend deps, and starts backend/server.js
+
+[phases.setup]
+# Use a Node runtime; Railway will pick the best available image, but this makes intent explicit
+packages = [ "nodejs-18_x" ]
+
+[phases.install]
+# Install server dependencies from the backend folder
+commands = [
+  "cd backend && npm ci --prefer-offline --no-audit --no-fund"
+]
+
+[phases.build]
+# Optional build step if you have one; harmless if no build script exists
+commands = [
+  "cd backend && npm run build --if-present"
+]
+
+[services]
+# Expose a single TCP service. Railway provides $PORT at runtime; backend should respect process.env.PORT
+[[services.static]]
+# no static files
+
+[[services]]
+type = "tcp"
+port = 3000
+command = "node backend/server.js"
+
+[env]
+# Example env mappings (define secrets/vars in Railway dashboard instead)
+# NODE_ENV = "production"
+
+# Notes:
+# - Ensure your backend reads the port from process.env.PORT (Railway provides this at runtime).
+# - If your backend needs a different start command (e.g. "npm start"), change `command` above accordingly.
+# - If Railway expects `nixpacks.toml` instead of `nixapack.toml`, rename this file to `nixpacks.toml`.

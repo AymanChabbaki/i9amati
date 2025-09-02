@@ -8,7 +8,6 @@ import ctrl from '../controllers/unionAgentController.js';
 
 import { auth, requireRole } from '../middleware/auth.js';
 
-const router = express.Router();
 // Add apartment (with address, type, owners)
 router.post('/apartments', auth, requireRole('union_agent'), ctrl.addApartment);
 // Property owner: get their own apartment and property details

@@ -1,0 +1,38 @@
+# Nixpacks configuration for Railway (backend only)
+# This config file lives inside the backend/ folder and will be used to build/run only the backend service.
+
+[phases.setup]
+packages = [ "nodejs-18_x" ]
+
+[phases.install]
+# Install server dependencies in the backend folder
+commands = [
+  "npm install --prefer-offline --no-audit --no-fund"
+]
+
+
+[services]
+[[services]]
+# Railway will provide the runtime port in $PORT; make sure your server reads process.env.PORT
+type = "tcp"
+port = 3000
+# Start the server from the backend folder (server.js should use process.env.PORT || 3000)
+command = "node server.js"
+
+[env]
+# Backend Environment Variables
+NODE_ENV=development
+PORT=3001
+
+# Database configuration (if needed)
+# DATABASE_URL=postgresql://username:password@localhost:5432/iqamati_db
+MONGO_URI=mongodb+srv://iqamati_admin:O5Ikyl3LwF59eggX@cluster0.e6os8wy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+# Session configuration
+SESSION_SECRET=your-secret-key-here
+
+# CORS
+FRONTEND_URL=https://iqamati.ma
+
+# JWT secret for authentication
+JWT_SECRET=supersecretkey123
