@@ -25,7 +25,7 @@ export default function MainLayout({ children }) {
       <TopNavigation />
       <div className="flex pt-16">
         <Sidebar />
-        <main className="flex-1 ml-64 p-6">
+        <main className="flex-1 ml-64 p-6 overflow-y-auto">
           {children}
         </main>
       </div>

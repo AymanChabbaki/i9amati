@@ -7,7 +7,7 @@ export default function UpcomingEvents() {
   const { user } = useAuth();
 
   const getEventsForRole = () => {
-    if (user?.role === 'owner') {
+    if (user?.role === 'property_owner') {
       return [
         {
           id: '1',
@@ -119,34 +119,26 @@ export default function UpcomingEvents() {
   const events = getEventsForRole();
 
   return (
-    <Card>
+    <Card className="w-full">
       <CardHeader>
-        <CardTitle className="flex items-center space-x-2">
-          <Calendar className="h-5 w-5" />
+        <CardTitle className="flex items-center space-x-2 text-2xl">
+          <Calendar className="h-6 w-6" />
           <span>Upcoming Events</span>
         </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           {events.map((event) => (
-            <div key={event.id} className="p-3 border border-gray-200 rounded-lg">
-              <div className="flex items-start justify-between mb-2">
-                <h4 className="font-medium text-gray-900">{event.title}</h4>
-                {getTypeBadge(event.type)}
-              </div>
-              <div className="space-y-1 text-sm text-gray-500">
-                <div className="flex items-center space-x-2">
-                  <Calendar className="h-4 w-4" />
-                  <span>{event.date}</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Clock className="h-4 w-4" />
-                  <span>{event.time}</span>
-                </div>
-                <div className="text-gray-600">
-                  📍 {event.location}
+            <div key={event.id} className="p-4 border border-gray-200 rounded-xl bg-gray-50 flex flex-col md:flex-row md:items-center md:justify-between">
+              <div>
+                <h4 className="font-semibold text-lg text-gray-900 mb-1">{event.title}</h4>
+                <div className="flex flex-wrap gap-4 text-sm text-gray-600 mb-1">
+                  <span className="flex items-center gap-1"><Calendar className="h-4 w-4" />{event.date}</span>
+                  <span className="flex items-center gap-1"><Clock className="h-4 w-4" />{event.time}</span>
+                  <span>📍 {event.location}</span>
                 </div>
               </div>
+              <div className="mt-2 md:mt-0">{getTypeBadge(event.type)}</div>
             </div>
           ))}
         </div>
