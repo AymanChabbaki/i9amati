@@ -1,7 +1,7 @@
 import { createServer } from "http";
 import { storage } from "./storage.js";
 
-export async function registerRoutes(app) {
+async function registerRoutes(app) {
   // Sample API routes
   
   // Authentication routes
@@ -82,3 +82,5 @@ export async function registerRoutes(app) {
   const httpServer = createServer(app);
   return httpServer;
 }
+
+export default registerRoutes;

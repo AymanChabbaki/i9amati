@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./db.js";
 import authRoutes from './routes/auth.js';
 import unionAgentRoutes from './routes/unionAgent.js';
+import registerRoutes from './routes.js'
 
 dotenv.config(); // Load environment variables
 
